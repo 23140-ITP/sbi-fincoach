@@ -339,6 +339,7 @@ h1, h2, h3, h4, h5, h6, .page-title {
   overflow-y: auto;
   padding: 24px;
   background-color: var(--bg);
+  min-width: 0;
 }
 
 .layout-chat {
