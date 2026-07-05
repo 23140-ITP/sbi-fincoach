@@ -1,19 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
-  --bg: #ffffff;
-  --surface: #fafafa;
-  --card: #f5f5f5;
-  --border: #e5e7eb;
-  --text: #111111;
-  --text-muted: #555555;
-  --accent: #111111;
-  --accent-hover: #222222;
-  --accent-blue: #2563eb;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --radius: 8px;
+  --bg: #f5f7f9;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --border: #dee1e6;
+  --border-soft: #eef0f3;
+  --text: #0a0b0d;
+  --text-muted: #5b616e;
+  --accent: #0052ff;
+  --accent-hover: #003ecc;
+  --accent-blue: #0052ff;
+  --success: #05b169;
+  --warning: #f4b000;
+  --danger: #cf202f;
+  --radius-xl: 24px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-pill: 9999px;
   --sidebar-w: 220px;
   --chat-w: 360px;
 }
@@ -31,6 +35,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+}
+
+/* Monospace font utility for numbers */
+.font-mono {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Quietly-confident display headings */
+h1, h2, h3, h4, h5, h6, .page-title {
+  font-weight: 400 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--text);
 }
 
 #root {
@@ -121,7 +139,7 @@ body {
 .nav-item {
   width: 100%;
   padding: 10px 12px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   border: none;
   background-color: transparent;
   color: var(--text-muted);
@@ -240,7 +258,7 @@ body {
 .chat-message-bubble {
   max-width: 80%;
   padding: 10px 14px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   font-size: 13px;
   display: flex;
   flex-direction: column;
@@ -280,7 +298,7 @@ body {
 .chat-input {
   flex: 1;
   padding: 10px 12px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background-color: var(--bg);
   color: var(--text);
@@ -294,7 +312,7 @@ body {
 
 .chat-send-btn {
   padding: 10px 16px;
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   border: none;
   background-color: var(--accent);
   color: #ffffff;
@@ -402,6 +420,21 @@ textarea:focus-visible,
 [role="button"]:focus-visible {
   outline: 2px solid var(--accent-blue) !important;
   outline-offset: 2px !important;
+}
+
+/* Circular asset plate for Coinbase */
+.asset-icon-circular {
+  background-color: var(--border-soft);
+  border-radius: var(--radius-pill);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  flex-shrink: 0;
 }
 
 

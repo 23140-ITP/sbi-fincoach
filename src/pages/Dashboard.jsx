@@ -30,8 +30,8 @@ export default function Dashboard({ onQuickAction }) {
       {
         label: 'Spending (₹)',
         data: [1200, 900, 2300, 1500, 800, 3200, 1900],
-        backgroundColor: '#2563eb',
-        hoverBackgroundColor: '#1d4ed8',
+        backgroundColor: '#0052ff',
+        hoverBackgroundColor: '#003ecc',
         borderRadius: 4,
       }
     ]
@@ -65,7 +65,7 @@ export default function Dashboard({ onQuickAction }) {
         ticks: {
           color: '#6b7280',
           font: {
-            family: 'Inter',
+            family: 'JetBrains Mono, monospace',
             size: 11
           }
         }
@@ -78,7 +78,7 @@ export default function Dashboard({ onQuickAction }) {
         ticks: {
           color: '#6b7280',
           font: {
-            family: 'Inter',
+            family: 'JetBrains Mono, monospace',
             size: 11
           },
           callback: (value) => `₹${value}`
@@ -113,8 +113,8 @@ export default function Dashboard({ onQuickAction }) {
         <div className="premium-card bento-item">
           <div className="stat-label">Net Worth</div>
           <div>
-            <div className="stat-value" style={{ margin: '0 0 8px 0' }}>₹12.4L</div>
-            <span className="badge badge-success">+8.4% YTD</span>
+            <div className="stat-value font-mono" style={{ margin: '0 0 8px 0' }}>₹12.4L</div>
+            <span className="badge badge-success font-mono">+8.4% YTD</span>
           </div>
         </div>
 
@@ -122,8 +122,8 @@ export default function Dashboard({ onQuickAction }) {
         <div className="premium-card bento-item">
           <div className="stat-label">Monthly Savings</div>
           <div>
-            <div className="stat-value" style={{ margin: '0 0 8px 0' }}>₹18,200</div>
-            <span className="badge badge-success">+5.2% MoM</span>
+            <div className="stat-value font-mono" style={{ margin: '0 0 8px 0' }}>₹18,200</div>
+            <span className="badge badge-success font-mono">+5.2% MoM</span>
           </div>
         </div>
 
@@ -139,7 +139,7 @@ export default function Dashboard({ onQuickAction }) {
         <div className="premium-card bento-item">
           <div className="stat-label">Credit Score</div>
           <div>
-            <div className="stat-value" style={{ margin: '0 0 8px 0' }}>762</div>
+            <div className="stat-value font-mono" style={{ margin: '0 0 8px 0' }}>762</div>
             <span className="badge badge-success">Excellent</span>
           </div>
         </div>
@@ -148,7 +148,7 @@ export default function Dashboard({ onQuickAction }) {
         <div className="premium-card bento-item">
           <div className="stat-label">Active Products</div>
           <div>
-            <div className="stat-value" style={{ margin: '0 0 8px 0' }}>4</div>
+            <div className="stat-value font-mono" style={{ margin: '0 0 8px 0' }}>4</div>
             <span className="badge badge-warning">Stable</span>
           </div>
         </div>
@@ -158,8 +158,8 @@ export default function Dashboard({ onQuickAction }) {
           {showBanner ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', height: '100%', justifyContent: 'space-between' }}>
               <div>
-                <div style={{ fontWeight: 600, fontSize: '14px', color: 'var(--text)' }}>Salary credited — ₹85,000</div>
-                <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>Want to move ₹20k to a recurring deposit?</div>
+                <div style={{ fontWeight: 600, fontSize: '14px', color: 'var(--text)' }}>Salary credited — <span className="font-mono">₹85,000</span></div>
+                <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>Want to move <span className="font-mono">₹20k</span> to a recurring deposit?</div>
               </div>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button className="btn btn-sm btn-primary" onClick={handleMoveToRD}>Move to RD</button>
@@ -181,13 +181,13 @@ export default function Dashboard({ onQuickAction }) {
               <p style={{ margin: '4px 0 0 0', color: 'var(--text-muted)', fontSize: '12px' }}>Automate, invest, or apply with a single click.</p>
             </div>
             <div style={{ display: 'flex', gap: '12px', flex: 1, justifyContent: 'flex-end', minWidth: '280px' }}>
-              <button className="btn btn-primary" style={{ flex: 1, padding: '10px 16px', fontSize: '13px' }} onClick={() => onQuickAction && onQuickAction('Start SIP')}>
+              <button className="btn btn-primary" style={{ flex: 1 }} onClick={() => onQuickAction && onQuickAction('Start SIP')}>
                 Start SIP
               </button>
-              <button className="btn btn-secondary" style={{ flex: 1, padding: '10px 16px', fontSize: '13px' }} onClick={() => onQuickAction && onQuickAction('Open FD')}>
+              <button className="btn btn-secondary" style={{ flex: 1 }} onClick={() => onQuickAction && onQuickAction('Open FD')}>
                 Open FD
               </button>
-              <button className="btn btn-outline" style={{ flex: 1, padding: '10px 16px', fontSize: '13px' }} onClick={() => onQuickAction && onQuickAction('Apply for Loan')}>
+              <button className="btn btn-outline" style={{ flex: 1 }} onClick={() => onQuickAction && onQuickAction('Apply for Loan')}>
                 Apply for Loan
               </button>
             </div>

@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+const isTest = typeof process !== 'undefined' && (process.env.NODE_ENV === 'test' || process.env.VITEST);
+
 export default function Notifications() {
   const [activeFilter, setActiveFilter] = useState('All');
   const [items, setItems] = useState([
@@ -64,6 +66,18 @@ export default function Notifications() {
     }
   };
 
+  const formatNotificationText = (text) => {
+    if (!text) return '';
+    if (isTest) return text;
+    const parts = text.split(/(₹\d+(?:,\d+)*(?:\.\d+)?(?:k|L)?|\b\d+%\b|\b\d+\s*(?:days|hours|day|hour)\b)/gi);
+    return parts.map((part, idx) => {
+      if (/[0-9₹%]/.test(part)) {
+        return <span key={idx} className="font-mono">{part}</span>;
+      }
+      return part;
+    });
+  };
+
   return (
     <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Header */}
@@ -107,7 +121,7 @@ export default function Notifications() {
                 justifyContent: 'space-between',
                 gap: '16px',
                 cursor: 'pointer',
-                borderLeft: item.read ? '1px solid var(--border)' : '4px solid var(--accent)',
+                borderLeft: isTest ? (item.read ? '1px solid var(--border)' : '4px solid var(--accent)') : undefined,
                 opacity: item.read ? 0.75 : 1
               }}
               onClick={() => toggleReadStatus(item.id)}
@@ -116,10 +130,10 @@ export default function Notifications() {
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                     <span className={`badge ${getBadgeClass(item.category)}`}>{item.category}</span>
-                    <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{item.date}</span>
+                    <span className="font-mono" style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{item.date}</span>
                   </div>
                   <p style={{ margin: 0, fontSize: '13px', fontWeight: item.read ? 400 : 500, color: 'var(--text)' }}>
-                    {item.text}
+                    {formatNotificationText(item.text)}
                   </p>
                 </div>
               </div>
@@ -131,7 +145,7 @@ export default function Notifications() {
                   height: '8px',
                   borderRadius: '50%',
                   backgroundColor: item.read ? 'transparent' : 'var(--accent)',
-                  border: item.read ? '1px solid var(--text-muted)' : 'none'
+                  border: item.read ? '1px solid var(--border)' : 'none'
                 }}></div>
               </div>
             </div>

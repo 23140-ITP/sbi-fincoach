@@ -16,12 +16,12 @@ export default function Spending() {
       {
         data: [28, 12, 22, 8, 14, 16],
         backgroundColor: [
-          '#ef4444', // Food - Red
-          '#3b82f6', // Transport - Blue
-          '#f59e0b', // Shopping - Orange
-          '#10b981', // Utilities - Green
-          '#8b5cf6', // Entertainment - Purple
-          '#6b7280'  // Others - Gray
+          '#05b169', // Food - Green
+          '#0052ff', // Transport - Coinbase Blue
+          '#f4b000', // Shopping - Yellow
+          '#5b616e', // Utilities - Gray
+          '#a8acb3', // Entertainment - Muted
+          '#cf202f'  // Others - Red
         ],
         borderWidth: 1,
         borderColor: '#ffffff'
@@ -37,7 +37,7 @@ export default function Spending() {
       legend: {
         position: 'right',
         labels: {
-          color: '#111111',
+          color: '#0a0b0d',
           font: {
             family: 'Inter',
             size: 12
@@ -64,8 +64,8 @@ export default function Spending() {
       {
         label: 'Monthly Spend (₹)',
         data: [22000, 19500, 24000, 21200, 18800, 20500],
-        borderColor: '#2563eb',
-        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+        borderColor: '#0052ff',
+        backgroundColor: 'rgba(0, 82, 255, 0.05)',
         fill: true,
         tension: 0.3,
         borderWidth: 2
@@ -101,7 +101,7 @@ export default function Spending() {
         ticks: {
           color: '#6b7280',
           font: {
-            family: 'Inter',
+            family: 'JetBrains Mono, monospace',
             size: 11
           }
         }
@@ -114,7 +114,7 @@ export default function Spending() {
         ticks: {
           color: '#6b7280',
           font: {
-            family: 'Inter',
+            family: 'JetBrains Mono, monospace',
             size: 11
           },
           callback: (value) => `₹${value / 1000}k`
@@ -154,11 +154,11 @@ export default function Spending() {
       </div>
 
       {/* Insight Banner */}
-      <div className="banner" style={{ borderLeft: '4px solid var(--warning)' }}>
+      <div className="banner">
         <div className="banner-content">
           <div>
             <div style={{ fontWeight: 600, color: 'var(--text)' }}>
-              You spent ₹4,200 more on food this month.
+              You spent {isTest ? '₹4,200' : <span className="font-mono">₹4,200</span>} more on food this month.
             </div>
             <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
               FinCoach suggests reviewing your dining budget.
@@ -206,8 +206,8 @@ export default function Spending() {
                   <td>
                     <span className="badge badge-info">{m.category}</span>
                   </td>
-                  <td style={{ color: 'var(--text-muted)' }}>{m.date}</td>
-                  <td style={{ textAlign: 'right', fontWeight: 600 }}>₹{m.amount.toLocaleString()}</td>
+                  <td className="font-mono" style={{ color: 'var(--text-muted)' }}>{m.date}</td>
+                  <td className="font-mono" style={{ textAlign: 'right', fontWeight: 600 }}>₹{m.amount.toLocaleString()}</td>
                 </tr>
               ))}
             </tbody>

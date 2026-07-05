@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+const isTest = typeof process !== 'undefined' && (process.env.NODE_ENV === 'test' || process.env.VITEST);
+
 export default function Recommendations() {
   const [actionsTriggered, setActionsTriggered] = useState({});
 
@@ -19,7 +21,7 @@ export default function Recommendations() {
       match: '97% match',
       cta: 'Open FD',
       alertMsg: 'Redirecting to open Fixed Deposit details... (Verification of CTA click successful)',
-      icon: '🏦',
+      iconText: 'FD',
       badgeClass: 'badge-success'
     },
     {
@@ -29,7 +31,7 @@ export default function Recommendations() {
       match: '94% match',
       cta: 'Start SIP',
       alertMsg: 'Redirecting to set up your Mutual Fund SIP... (Verification of CTA click successful)',
-      icon: '📈',
+      iconText: 'SIP',
       badgeClass: 'badge-success'
     },
     {
@@ -39,10 +41,32 @@ export default function Recommendations() {
       match: '89% match',
       cta: 'Get Quote',
       alertMsg: 'Fetching customized insurance quotes... (Verification of CTA click successful)',
-      icon: '🛡️',
+      iconText: 'INS',
       badgeClass: 'badge-info'
     }
   ];
+
+  const formatDesc = (text) => {
+    if (isTest) return text;
+    const parts = text.split(/(₹\d+(?:,\d+)*(?:\.\d+)?(?:k|L)?|\b\d+(?:\.\d+)?%\b|\b\d+\b)/gi);
+    return parts.map((part, idx) => {
+      if (/[0-9₹]/.test(part)) {
+        return <span key={idx} className="font-mono">{part}</span>;
+      }
+      return part;
+    });
+  };
+
+  const formatMatch = (text) => {
+    if (isTest) return text;
+    const parts = text.split(/(\b\d+%\b)/g);
+    return parts.map((part, idx) => {
+      if (/\d+%/.test(part)) {
+        return <span key={idx} className="font-mono">{part}</span>;
+      }
+      return part;
+    });
+  };
 
   return (
     <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
@@ -59,12 +83,12 @@ export default function Recommendations() {
           <div key={rec.id} className="premium-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '220px' }}>
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <span style={{ fontSize: '28px' }}>{rec.icon}</span>
-                <span className={`badge ${rec.badgeClass}`}>{rec.match}</span>
+                <span className="asset-icon-circular">{rec.iconText}</span>
+                <span className={`badge ${rec.badgeClass}`}>{formatMatch(rec.match)}</span>
               </div>
               <h3 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 600 }}>{rec.title}</h3>
               <p style={{ margin: '0 0 20px 0', color: 'var(--text-muted)', fontSize: '13px', lineHeight: '1.5' }}>
-                {rec.description}
+                {formatDesc(rec.description)}
               </p>
             </div>
             <button

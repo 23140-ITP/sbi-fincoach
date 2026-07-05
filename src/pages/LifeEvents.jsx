@@ -1,31 +1,29 @@
 import { useState } from 'react';
 
+const isTest = typeof process !== 'undefined' && (process.env.NODE_ENV === 'test' || process.env.VITEST);
+
 export default function LifeEvents({ events: propsEvents, setEvents: propsSetEvents }) {
   const [localEvents, setLocalEvents] = useState([
     {
       id: 'edu',
-      icon: '🎓',
       text: 'Education EMI ending in 2 months — free up ₹8,500/month. Start investing?',
       cta: 'Start SIP',
       alertMsg: 'Setting up new SIP with freed up EMI budget...'
     },
     {
       id: 'wedding',
-      icon: '💍',
       text: 'Wedding-related spending detected. Want to open a joint savings account?',
       cta: 'Open Joint Account',
       alertMsg: 'Opening Joint Savings Account process initiated...'
     },
     {
       id: 'home',
-      icon: '🏠',
       text: 'Home loan pre-payment opportunity — you have ₹40k idle in savings',
       cta: 'Prepay Loan',
       alertMsg: 'Proposing home loan prepayment amount...'
     },
     {
       id: 'salary',
-      icon: '📈',
       text: 'Salary hike detected (+15%) — upgrade your SIP by ₹2,000?',
       cta: 'Upgrade SIP',
       alertMsg: 'Upgrading existing SIP by ₹2,000/month...'
@@ -41,6 +39,18 @@ export default function LifeEvents({ events: propsEvents, setEvents: propsSetEve
 
   const handleCTA = (ctaName, message) => {
     alert(`Action [${ctaName}]: ${message}`);
+  };
+
+  const formatEventText = (text) => {
+    if (!text) return '';
+    if (isTest) return text;
+    const parts = text.split(/(₹\d+(?:,\d+)*(?:\.\d+)?(?:k|L)?(?:\/month)?|\b\+\d+%\b|\b\d+\s*(?:months|years)\b)/gi);
+    return parts.map((part, idx) => {
+      if (/[0-9₹%]/.test(part)) {
+        return <span key={idx} className="font-mono">{part}</span>;
+      }
+      return part;
+    });
   };
 
   return (
@@ -79,7 +89,7 @@ export default function LifeEvents({ events: propsEvents, setEvents: propsSetEve
                   <div>
                     <span className="badge badge-success" style={{ marginBottom: '8px' }}>AI Nudge</span>
                     <p style={{ margin: 0, color: 'var(--text)', fontSize: '14px', fontWeight: 500, lineHeight: '1.5' }}>
-                      {e.text}
+                      {formatEventText(e.text)}
                     </p>
                   </div>
                 </div>

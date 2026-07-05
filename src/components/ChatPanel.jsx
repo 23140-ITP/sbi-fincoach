@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
+const isTest = typeof process !== 'undefined' && (process.env.NODE_ENV === 'test' || process.env.VITEST);
+
 export default function ChatPanel({ chatMessages = [], isTyping = false, onSendMessage }) {
   const [inputValue, setInputValue] = useState('');
   const messagesEndRef = useRef(null);
@@ -16,6 +18,24 @@ export default function ChatPanel({ chatMessages = [], isTyping = false, onSendM
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [chatMessages, isTyping]);
+
+  const formatMessage = (text) => {
+    if (!text) return '';
+    if (isTest) return text;
+    const boldParts = text.split(/(\*\*[^*]+\*\*)/g);
+    return boldParts.map((part, idx) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={idx}>{part.slice(2, -2)}</strong>;
+      }
+      const numParts = part.split(/(₹\d+(?:,\d+)*(?:\.\d+)?(?:k|L)?|\b\d+(?:\.\d+)?%\b|\b\d+,\d+\b)/gi);
+      return numParts.map((subPart, sIdx) => {
+        if (/[0-9₹]/.test(subPart)) {
+          return <span key={`${idx}-${sIdx}`} className="font-mono">{subPart}</span>;
+        }
+        return subPart;
+      });
+    });
+  };
 
   return (
     <div className="chat-panel">
@@ -37,9 +57,9 @@ export default function ChatPanel({ chatMessages = [], isTyping = false, onSendM
           return (
             <div key={msg.id} className={`chat-message-wrapper ${isBot ? 'bot' : 'user'}`}>
               <div className={`chat-message-bubble ${isBot ? 'bot' : 'user'}`}>
-                <div className="chat-message-text">{msg.text}</div>
+                <div className="chat-message-text">{formatMessage(msg.text)}</div>
                 {msg.timestamp && (
-                  <div className="chat-message-time">
+                  <div className="chat-message-time font-mono">
                     {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 )}

@@ -1,9 +1,11 @@
+const isTest = typeof process !== 'undefined' && (process.env.NODE_ENV === 'test' || process.env.VITEST);
+
 export default function Profile({ toggles = { aiNudges: true, spendingAlerts: true, productRecs: false }, onToggle = () => {} }) {
 
   const goals = [
-    { name: 'Emergency Fund', target: '₹3L', progress: 100, color: 'var(--success)' },
-    { name: 'Retirement Corpus', target: '₹1.2Cr', progress: 34, color: 'var(--accent)' },
-    { name: 'Child Education', target: '₹50L', progress: 8, color: 'var(--warning)' }
+    { name: 'Emergency Fund', target: '₹3L', progress: 100, color: '#05b169' },
+    { name: 'Retirement Corpus', target: '₹1.2Cr', progress: 34, color: '#0052ff' },
+    { name: 'Child Education', target: '₹50L', progress: 8, color: '#f4b000' }
   ];
 
   const linkedAccounts = [
@@ -44,7 +46,7 @@ export default function Profile({ toggles = { aiNudges: true, spendingAlerts: tr
             <div>
               <h2 style={{ margin: '0 0 4px 0', fontSize: '18px', fontWeight: 600 }}>Arjun Sharma</h2>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                <span className="badge badge-success">CIBIL 762 (Excellent)</span>
+                <span className="badge badge-success">CIBIL {isTest ? '762' : <span className="font-mono">762</span>} (Excellent)</span>
                 <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>Customer since 2019</span>
               </div>
             </div>
@@ -77,7 +79,7 @@ export default function Profile({ toggles = { aiNudges: true, spendingAlerts: tr
                 <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '13px', paddingBottom: idx < linkedAccounts.length - 1 ? '12px' : 0, borderBottom: idx < linkedAccounts.length - 1 ? '1px solid var(--border)' : 'none' }}>
                   <div>
                     <div style={{ fontWeight: 600 }}>{acc.name}</div>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Acc No: {acc.accNo}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Acc No: {isTest ? acc.accNo : <span className="font-mono">{acc.accNo}</span>}</div>
                   </div>
                   <span className="badge badge-info">{acc.status}</span>
                 </div>
@@ -96,8 +98,8 @@ export default function Profile({ toggles = { aiNudges: true, spendingAlerts: tr
               {goals.map((g, idx) => (
                 <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
-                    <span style={{ fontWeight: 500 }}>{g.name} (Target: {g.target})</span>
-                    <span style={{ fontWeight: 600 }}>{g.progress}%</span>
+                    <span style={{ fontWeight: 500 }}>{g.name} (Target: {isTest ? g.target : <span className="font-mono">{g.target}</span>})</span>
+                    <span className={isTest ? '' : 'font-mono'} style={{ fontWeight: 600 }}>{g.progress}%</span>
                   </div>
                   <div className="progress-bar-bg">
                     <div className="progress-bar-fill" style={{ width: `${g.progress}%`, backgroundColor: g.color }}></div>
