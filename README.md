@@ -73,8 +73,8 @@ To run the project locally, ensure you have [Node.js](https://nodejs.org/) insta
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd peaceful-lovelace
+git clone https://github.com/23140-ITP/sbi-fincoach.git
+cd sbi-fincoach
 
 # Install dependencies
 npm install
