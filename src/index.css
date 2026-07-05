@@ -387,5 +387,22 @@ body {
   background: var(--text-muted);
 }
 
+/* Accessibility Focus Rings */
+.nav-item:focus-visible,
+.btn:focus-visible,
+.chat-input:focus-visible,
+.chat-send-btn:focus-visible,
+.date-tab:focus-visible,
+.filter-tab:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--accent-blue) !important;
+  outline-offset: 2px !important;
+}
+
 
 
