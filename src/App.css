@@ -110,6 +110,8 @@
   outline: none;
   text-decoration: none;
   height: 44px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-sm {

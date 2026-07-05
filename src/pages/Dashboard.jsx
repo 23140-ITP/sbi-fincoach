@@ -181,13 +181,13 @@ export default function Dashboard({ onQuickAction }) {
               <p style={{ margin: '4px 0 0 0', color: 'var(--text-muted)', fontSize: '12px' }}>Automate, invest, or apply with a single click.</p>
             </div>
             <div style={{ display: 'flex', gap: '12px', flex: 1, justifyContent: 'flex-end', minWidth: '280px' }}>
-              <button className="btn btn-primary" style={{ flex: 1 }} onClick={() => onQuickAction && onQuickAction('Start SIP')}>
+              <button className="btn btn-primary" onClick={() => onQuickAction && onQuickAction('Start SIP')}>
                 Start SIP
               </button>
-              <button className="btn btn-secondary" style={{ flex: 1 }} onClick={() => onQuickAction && onQuickAction('Open FD')}>
+              <button className="btn btn-secondary" onClick={() => onQuickAction && onQuickAction('Open FD')}>
                 Open FD
               </button>
-              <button className="btn btn-outline" style={{ flex: 1 }} onClick={() => onQuickAction && onQuickAction('Apply for Loan')}>
+              <button className="btn btn-outline" onClick={() => onQuickAction && onQuickAction('Apply for Loan')}>
                 Apply for Loan
               </button>
             </div>
