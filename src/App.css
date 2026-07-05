@@ -6,12 +6,13 @@
   border-radius: var(--radius-xl);
   padding: 20px;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .premium-card:hover {
   border-color: var(--border);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
 }
 
 .stat-grid {
@@ -177,6 +178,15 @@
   padding: 12px 16px;
   border-bottom: 1px solid var(--border);
   color: var(--text);
+}
+
+.premium-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.premium-table tbody tr:hover td {
+  background-color: var(--border-soft);
+  cursor: pointer;
 }
 
 .premium-table tr:last-child td {

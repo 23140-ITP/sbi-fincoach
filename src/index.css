@@ -160,13 +160,13 @@ h1, h2, h3, h4, h5, h6, .page-title {
 }
 
 .nav-item.active {
-  background-color: var(--border);
-  color: var(--text);
+  background-color: rgba(0, 82, 255, 0.06);
+  color: var(--accent);
   font-weight: 600;
 }
 
 .nav-item.active:hover {
-  background-color: #e5e7eb;
+  background-color: rgba(0, 82, 255, 0.1);
 }
 
 /* ChatPanel Styles */
@@ -266,8 +266,8 @@ h1, h2, h3, h4, h5, h6, .page-title {
 }
 
 .chat-message-bubble.bot {
-  background-color: var(--card);
-  border: 1px solid var(--border);
+  background-color: var(--bg);
+  border: none;
   color: var(--text);
 }
 
