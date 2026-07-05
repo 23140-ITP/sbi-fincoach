@@ -142,13 +142,13 @@ body {
 }
 
 .nav-item.active {
-  background-color: var(--accent);
-  color: #ffffff;
+  background-color: var(--border);
+  color: var(--text);
   font-weight: 600;
 }
 
 .nav-item.active:hover {
-  background-color: var(--accent-hover);
+  background-color: #e5e7eb;
 }
 
 /* ChatPanel Styles */
