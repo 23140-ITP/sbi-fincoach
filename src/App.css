@@ -254,8 +254,9 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 40px;
-  height: 20px;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
 .switch input {
@@ -272,26 +273,26 @@
   right: 0;
   bottom: 0;
   background-color: #e5e7eb;
-  transition: .2s;
-  border-radius: 20px;
-  border: 1px solid var(--border);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 9999px;
+  border: none;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 12px;
-  width: 12px;
+  height: 18px;
+  width: 18px;
   left: 3px;
-  bottom: 3px;
+  top: 3px;
   background-color: white;
-  transition: .2s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 input:checked + .slider {
   background-color: var(--accent);
-  border-color: var(--accent);
 }
 
 input:checked + .slider:before {
